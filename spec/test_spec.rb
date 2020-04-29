@@ -125,5 +125,18 @@ describe Enumerable do
       expect(array.my_none?(2)).to eq(true)
     end
   end
-
+  describe '#my_inject' do
+    it 'returns the function call of the block' do
+      expect(array.my_inject{ |x, y| x * y }).to eql(array.inject{|x, y| x * y} )
+    end
+    it ' inject with symbol' do
+      expect((5..10).my_inject(:+)).to eql((5..10).inject(:+))
+    end
+    it 'with a symbol and initial value for' do
+      expect((5..10).my_inject(1, :*)).to eql((5..10).inject(1, :*))
+    end
+    it 'returns function call of the block with initial value' do
+      expect((5..10).my_inject(1) { |product, n| product * n }).to eql((5..10).inject(1) { |product, n| product * n })
+    end
+  end
 end

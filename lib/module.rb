@@ -47,6 +47,7 @@ module Enumerable
     end
     res
   end
+
   def my_any?(args = nil)
     res = false
     my_each do |x|
@@ -121,4 +122,4 @@ end
 
 array = [1,2,3,4,5]
 
-p array.my_each {|x| puts x} == array.each {|x| puts x}
+p array.my_inject {|x, y| x*y}
