@@ -12,9 +12,9 @@ describe Enumerable do
       expect(array.my_each.to_a).to eql(array)
     end
     it 'block_given' do
-      expect(array.my_each { |x| puts { x }.to_s }).to eql(array.my_each { |x| puts {x}.to_s})
+      expect(array.my_each { |x| puts {x}.to_a }).to eql(array.each { |x| puts {x}.to_a })
     end
-    it 'raise error if arguement passed' do
+    it 'raise error if argument passed' do
       expect { array.my_each('argument') }.to raise_error(ArgumentError)
     end
   end
@@ -24,7 +24,7 @@ describe Enumerable do
       expect(array.my_each_with_index).to be_a(Enumerator)
     end
     it 'expect to be the array and index' do
-      expect(array.my_each { |item, index| puts item, index }).to eql(array.my_each { |item| puts item, array.index})
+      expect(array.my_each_with_index { |item, index| puts item, index }).to eql(array.each_with_index { |item| puts item, array.index})
     end
     it 'raise error if arguement passed' do
       expect { array.my_each_with_index('argument') }.to raise_error(ArgumentError)

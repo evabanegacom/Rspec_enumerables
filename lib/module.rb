@@ -8,6 +8,7 @@ module Enumerable
       yield(elements[index])
       index += 1
     end
+    self
   end
 
   def my_each_with_index
@@ -19,6 +20,7 @@ module Enumerable
       yield(elements[index], index)
       index += 1
     end
+    self
   end
 
   def my_select(&array)
@@ -102,4 +104,4 @@ end
 
 array = [1,2,3,4,5]
 
-p array.my_each_with_index {|x, y| print x, y}
+p array.my_each {|x| puts x} == array.each {|x| puts x}
