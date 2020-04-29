@@ -33,32 +33,49 @@ module Enumerable
     selected_items
   end
 
-  def my_all?(array = nil)
-    if array
-      my_each { |x| return false unless array includes? x }
-    elsif !block_given?
-      my_each { |x| return false unless x }
-    else
-      my_each { |x| return false unless yield(x) }
+  # rubocop: disable Style/CaseEquality, Style/IfInsideElse
+  def my_all?(args = nil)
+    res = true
+    my_each do |x|
+      if block_given?
+        res = false unless yield(x)
+      elsif !args
+        res = false unless x
+      else
+        res = false unless args === x
+      end
     end
-    true
+    res
   end
-
   def my_any?(args = nil)
-    if args
-      my_each { |x| return true if args includes? x }
+    res = false
+    my_each do |x|
+      if block_given?
+        res = true if yield(x)
+      elsif !args
+        res = true if x
+      else
+        res = true if args === x
+      end
     end
-    if !block_given?
-      my_each { |x| return true if x }
-    else
-      my_each { |x| return true if yield(x) }
-    end
-    false
+    res
   end
 
-  def my_none?(args = nil, &block)
-    !my_any?(args, &block)
+  def my_none?(args = nil)
+    res = true
+    my_each do |x|
+      if block_given?
+        res = false if yield(x)
+      elsif !args
+        res = false if x
+      else
+        res = false if args === x
+      end
+    end
+    res
   end
+
+  # rubocop: enable Style/CaseEquality, Style/IfInsideElse
 
   def my_count(arguement = nil)
     counter = 0

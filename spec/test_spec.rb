@@ -4,6 +4,8 @@ require './lib/module'
 
 describe Enumerable do
   let(:array) { [1, 1, 1, 4, 5] }
+  let(:one_array) { [1, 1, 1] }
+  let(:arr_text) { %w[ant bear cat] }
   describe '#my_each' do
     it 'if no block is given it should return the enumerator' do
       expect(array.my_each).to be_a(Enumerator)
@@ -70,6 +72,58 @@ describe Enumerable do
     end
   end
 
+  describe "#my_all?" do
+    it 'return true if all element satisfy the condition' do
+      expect(arr_text.my_all? { |word| word.length >= 3 }).to eql(true)
+    end
+    it 'return false if any of the element doesnot satisfy the condition' do
+      expect(arr_text.my_all? { |word| word.length >= 4 }).to eql(false)
+    end
+    it 'return true if all element member of class' do
+      expect(array.my_all? (Integer)).to eql(true)
+    end
+    it 'return true if all of the collection matches the pattern' do
+      expect(one_array.my_any?(1)).to eq(true)
+    end
+  end
 
+  describe "#my_any?" do
+    it 'return true if any element satisfy the condition' do
+      expect(arr_text.my_any? { |word| word.length >= 4 }).to eql(true)
+    end
+    it 'return false if no element doesnot satisfy the condition' do
+      expect(arr_text.my_any? { |word| word.length >= 5 }).to eql(false)
+    end
+    it 'return true if any element is member of class' do
+      expect(array.my_any? (Integer)).to eql(true)
+    end
+    it 'return false if no element is member of class' do
+      expect(arr_text.my_any? (Integer)).to eql(false)
+    end
+    it 'return true if any of the collection matches the pattern' do
+      expect(array.my_any?(1)).to eq(true)
+    end
+  end
+
+  describe "#my_none?" do
+    it 'return true if none of element satisfy the condition' do
+      expect(arr_text.my_none? { |word| word.length >= 5 }).to eql(true)
+    end
+    it 'return false if any element satisfy the condition' do
+      expect(arr_text.my_none? { |word| word.length >= 4 }).to eql(false)
+    end
+    it 'return false if all element satisfy the condition' do
+      expect(arr_text.my_none? { |word| word.length >= 3 }).to eql(false)
+    end
+    it 'return true if none element is member of class' do
+      expect(arr_text.my_none? (Integer)).to eql(true)
+    end
+    it 'return false if all element is member of class' do
+      expect(array.my_none? (Integer)).to eql(false)
+    end
+    it 'return true if none of the collection matches the pattern' do
+      expect(array.my_none?(2)).to eq(true)
+    end
+  end
 
 end
