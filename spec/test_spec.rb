@@ -6,6 +6,7 @@ describe Enumerable do
   let(:array) { [1, 1, 1, 4, 5] }
   let(:one_array) { [1, 1, 1] }
   let(:arr_text) { %w[ant bear cat] }
+  let(:arr_str) { %w[dog door dish] }
   describe '#my_each' do
     it 'if no block is given it should return the enumerator' do
       expect(array.my_each).to be_a(Enumerator)
@@ -90,6 +91,9 @@ describe Enumerable do
     it 'return true if all of the collection matches the pattern' do
       expect(one_array.my_any?(1)).to eq(true)
     end
+    it 'returns false if all of the collection doesnot matches the Regex' do
+      expect(arr_str.my_all?(/\d/)).to eq(false)
+    end
   end
 
   describe '#my_any?' do
@@ -107,6 +111,12 @@ describe Enumerable do
     end
     it 'return true if any of the collection matches the pattern' do
       expect(array.my_any?(1)).to eq(true)
+    end
+    it 'returns true if any of the collection matches the Regex' do
+      expect(arr_str.my_any?(/ish/)).to eq(true)
+    end
+    it 'returns false if none of the collection matches the Regex' do
+      expect(arr_str.my_any?(/hello/)).to eq(false)
     end
   end
 
@@ -128,6 +138,12 @@ describe Enumerable do
     end
     it 'return true if none of the collection matches the pattern' do
       expect(array.my_none?(2)).to eq(true)
+    end
+    it 'returns true if none of the collection matches the Regex' do
+      expect(arr_str.my_none?(/hello/)).to eq(true)
+    end
+    it 'returns false if any of the collection matches the Regex' do
+      expect(arr_str.my_none?(/ish/)).to eq(false)
     end
   end
   describe '#my_inject' do
