@@ -10,7 +10,7 @@ describe Enumerable do
     it 'if no block is given it should return the enumerator' do
       expect(array.my_each).to be_a(Enumerator)
     end
-    it 'expect to be the array' do
+    it 'expect to return all the items in the array' do
       expect(array.my_each.to_a).to eql(array)
     end
     it 'block_given' do
@@ -38,11 +38,11 @@ describe Enumerable do
       expect(array.my_count).to eql(5)
     end
 
-    it 'returns the ' do
+    it 'returns the call or conditional call' do
       expect(array.my_count(1)).to eq(3)
     end
 
-    it 'returns even nimbers' do
+    it 'returns the number of odd numbers' do
       expect(array.my_count(&:odd?)).to eq(4)
     end
   end
