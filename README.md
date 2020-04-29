@@ -10,11 +10,24 @@ my own ruby's enumerables project by testing them with various conditions as the
 this way we can identify how well my own version of the Ruby's enumerables meet the functionality
 of the original enumerable by comparing them using rspec.
 
+# sample output
+
+![screenshot](lib/rspec.png)
+
+# Step to run the project
+
+This project is created using rspec. rspec must be installed to run this
+
+1. Fork/Clone this project to your local machine
+2. Open terminal and navigate to project folder
+3. Run rspec test using this commmand `rspec` at terminal
+
 # Built With
 
 -rubocop, VScode & ruby, Rspec
 
 # Prerequisites
+
 Visual Studio code editor
 
 # Authors
@@ -29,6 +42,7 @@ Visual Studio code editor
 - Github: (https://github.com/karthi07)
 
 # 🤝 Contributing
+
 Contributions, issues and feature requests are welcome!
 
 Feel free to check the issues page.

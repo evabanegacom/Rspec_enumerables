@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     return enum_for unless block_given?
@@ -33,7 +35,7 @@ module Enumerable
     selected_items
   end
 
-  # rubocop: disable Style/CaseEquality, Style/IfInsideElse
+  # rubocop: disable Style/CaseEquality, Style/IfInsideElse, Metrics/MethodLength
   def my_all?(args = nil)
     res = true
     my_each do |x|
@@ -76,7 +78,7 @@ module Enumerable
     res
   end
 
-  # rubocop: enable Style/CaseEquality, Style/IfInsideElse
+  # rubocop: enable Style/CaseEquality, Style/IfInsideElse, Metrics/MethodLength
 
   def my_count(arguement = nil)
     counter = 0
@@ -102,7 +104,7 @@ module Enumerable
     selected
   end
 
-  def my_inject(element = nil, symbol = nil, &block)
+  def my_inject(element = nil, symbol = nil, &block) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     element = element.to_sym if element.is_a?(String) && !symbol && !block
     if element.is_a?(Symbol) && !symbol
       block = element.to_proc
@@ -119,7 +121,3 @@ def multiply_els(item)
   array = Array(item)
   array.my_inject { |x, y| x * y }
 end
-
-array = [1,2,3,4,5]
-
-p array.my_inject {|x, y| x*y}

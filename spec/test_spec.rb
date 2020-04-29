@@ -14,7 +14,8 @@ describe Enumerable do
       expect(array.my_each.to_a).to eql(array)
     end
     it 'block_given' do
-      expect(array.my_each { |x| puts {x}.to_a }).to eql(array.each { |x| puts {x}.to_a })
+      expect(array.my_each { |x| puts { x }.to_a }).to \
+        eql(array.each { |x| puts { x }.to_a })
     end
     it 'raise error if argument passed' do
       expect { array.my_each('argument') }.to raise_error(ArgumentError)
@@ -26,10 +27,12 @@ describe Enumerable do
       expect(array.my_each_with_index).to be_a(Enumerator)
     end
     it 'expect to be the array and index' do
-      expect(array.my_each_with_index { |item, index| puts item, index }).to eql(array.each_with_index { |item| puts item, array.index})
+      expect(array.my_each_with_index { |item, index| puts item, index }).to \
+        eql(array.each { |item| puts item, array.index })
     end
     it 'raise error if arguement passed' do
-      expect { array.my_each_with_index('argument') }.to raise_error(ArgumentError)
+      expect { array.my_each_with_index('argument') }.to \
+        raise_error(ArgumentError)
     end
   end
 
@@ -65,14 +68,16 @@ describe Enumerable do
     end
     proc_ = proc { |x| x > 2 }
     it 'if a proc is given' do
-      expect(array.my_map(proc_) {|x| x > 2}).to eql([false, false, false, true, true])
+      expect(array.my_map(proc_) { |x| x > 2 }).to \
+        eql([false, false, false, true, true])
     end
     it 'for regular expressions it should return their classes' do
-      expect(array.my_map(&:class)).to eql([Integer, Integer, Integer, Integer, Integer])
+      expect(array.my_map(&:class)).to \
+        eql([Integer, Integer, Integer, Integer, Integer])
     end
   end
 
-  describe "#my_all?" do
+  describe '#my_all?' do
     it 'return true if all element satisfy the condition' do
       expect(arr_text.my_all? { |word| word.length >= 3 }).to eql(true)
     end
@@ -80,7 +85,7 @@ describe Enumerable do
       expect(arr_text.my_all? { |word| word.length >= 4 }).to eql(false)
     end
     it 'return true if all element member of class' do
-      expect(array.my_all? (Integer)).to eql(true)
+      expect(array.my_all?(Integer)).to eql(true)
     end
     it 'return true if all of the collection matches the pattern' do
       expect(one_array.my_any?(1)).to eq(true)
@@ -95,17 +100,17 @@ describe Enumerable do
       expect(arr_text.my_any? { |word| word.length >= 5 }).to eql(false)
     end
     it 'return true if any element is member of class' do
-      expect(array.my_any? (Integer)).to eql(true)
+      expect(array.my_any?(Integer)).to eql(true)
     end
     it 'return false if no element is member of class' do
-      expect(arr_text.my_any? (Integer)).to eql(false)
+      expect(arr_text.my_any?(Integer)).to eql(false)
     end
     it 'return true if any of the collection matches the pattern' do
       expect(array.my_any?(1)).to eq(true)
     end
   end
 
-  describe "#my_none?" do
+  describe '#my_none?' do
     it 'return true if none of element satisfy the condition' do
       expect(arr_text.my_none? { |word| word.length >= 5 }).to eql(true)
     end
@@ -116,10 +121,10 @@ describe Enumerable do
       expect(arr_text.my_none? { |word| word.length >= 3 }).to eql(false)
     end
     it 'return true if none element is member of class' do
-      expect(arr_text.my_none? (Integer)).to eql(true)
+      expect(arr_text.my_none?(Integer)).to eql(true)
     end
     it 'return false if all element is member of class' do
-      expect(array.my_none? (Integer)).to eql(false)
+      expect(array.my_none?(Integer)).to eql(false)
     end
     it 'return true if none of the collection matches the pattern' do
       expect(array.my_none?(2)).to eq(true)
@@ -127,7 +132,8 @@ describe Enumerable do
   end
   describe '#my_inject' do
     it 'returns the function call of the block' do
-      expect(array.my_inject{ |x, y| x * y }).to eql(array.inject{|x, y| x * y} )
+      expect(array.my_inject { |x, y| x * y }).to \
+        eql(array.inject { |x, y| x * y })
     end
     it ' inject with symbol' do
       expect((5..10).my_inject(:+)).to eql((5..10).inject(:+))
@@ -136,7 +142,8 @@ describe Enumerable do
       expect((5..10).my_inject(1, :*)).to eql((5..10).inject(1, :*))
     end
     it 'returns function call of the block with initial value' do
-      expect((5..10).my_inject(1) { |product, n| product * n }).to eql((5..10).inject(1) { |product, n| product * n })
+      expect((5..10).my_inject(1) { |product, n| product * n }).to \
+        eql((5..10).inject(1) { |product, n| product * n })
     end
   end
 end
