@@ -87,7 +87,7 @@ describe Enumerable do
     end
   end
 
-  describe "#my_any?" do
+  describe '#my_any?' do
     it 'return true if any element satisfy the condition' do
       expect(arr_text.my_any? { |word| word.length >= 4 }).to eql(true)
     end
