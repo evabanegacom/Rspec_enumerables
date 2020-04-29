@@ -146,4 +146,10 @@ describe Enumerable do
         eql((5..10).inject(1) { |product, n| product * n })
     end
   end
+  describe '#multiply_els' do
+    it 'returns the function call of the block' do
+      expect(multiply_els(array)).to \
+        eql(array.inject { |x, y| x * y })
+    end
+  end
 end
