@@ -3,7 +3,8 @@
 Test for enumerables
 
 This is a collaborative project about testing the some of the ruby(s) enumerables
-This is a Test Driven Development (TDD) project using Rspec to ratify the functionalities of
+
+It is is a Test Driven Development (TDD) project using Rspec to ratify the functionalities of
 
 my own ruby's enumerables project by testing them with various conditions as they apply.
 this way we can identify how well my own version of the Ruby's enumerables meet the functionality
