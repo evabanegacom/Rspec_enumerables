@@ -4,7 +4,6 @@ require './lib/module'
 
 describe Enumerable do
   let(:array) { [1, 1, 1, 4, 5] }
-  let(:regex) { %w[dog door rod blade] }
   describe '#my_each' do
     it 'if no block is given it should return the enumerator' do
       expect(array.my_each).to be_a(Enumerator)
@@ -67,7 +66,7 @@ describe Enumerable do
       expect(array.my_map(proc_) {|x| x > 2}).to eql([false, false, false, true, true])
     end
     it 'for regular expressions it should return their classes' do
-      expect(regex.my_map(&:class)).to eql([String, String, String, String])
+      expect(array.my_map(&:class)).to eql([Integer, Integer, Integer, Integer, Integer])
     end
   end
 
